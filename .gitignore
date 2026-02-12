@@ -47,7 +47,7 @@ data/processed/*.csv
 *.sqlite
 
 # Models
-models/*.joblib
+# models/*.joblib  # Commented out to include models in repo for Streamlit deployment
 models/*.pkl
 models/*.h5
 *.onnx
