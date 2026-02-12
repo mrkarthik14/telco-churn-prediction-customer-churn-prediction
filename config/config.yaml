@@ -1,0 +1,196 @@
+# Telco Churn Prediction - Configuration File
+
+# Data Processing
+data:
+  raw_path: "data/raw/WA_Fn-UseC_-Telco-Customer-Churn.csv"
+  processed_path: "data/processed/"
+  test_size: 0.2
+  random_state: 42
+  stratify: true
+
+# Feature Engineering
+features:
+  # Tenure buckets (in months)
+  tenure_buckets:
+    - 0
+    - 12
+    - 24
+    - 48
+    - 72
+  
+  # Categorical encoding strategy
+  encoding:
+    target_encode: ['Contract', 'PaymentMethod', 'InternetService']
+    one_hot: ['gender', 'Partner', 'Dependents']
+    ordinal: []
+  
+  # Feature selection
+  selection:
+    method: 'mutual_info'  # Options: mutual_info, chi2, f_classif
+    k_best: 20
+    remove_correlated: true
+    correlation_threshold: 0.95
+
+# Model Training
+models:
+  # Logistic Regression
+  logistic_regression:
+    enabled: true
+    params:
+      C: 1.0
+      max_iter: 1000
+      class_weight: 'balanced'
+      solver: 'lbfgs'
+    tune: false
+    
+  # Random Forest
+  random_forest:
+    enabled: true
+    params:
+      n_estimators: 100
+      max_depth: 10
+      min_samples_split: 5
+      min_samples_leaf: 2
+      class_weight: 'balanced'
+      random_state: 42
+      n_jobs: -1
+    tune: true
+    tune_params:
+      n_estimators: [50, 100, 200]
+      max_depth: [5, 10, 15, 20]
+      min_samples_split: [2, 5, 10]
+      min_samples_leaf: [1, 2, 4]
+  
+  # XGBoost
+  xgboost:
+    enabled: true
+    params:
+      n_estimators: 100
+      max_depth: 6
+      learning_rate: 0.1
+      subsample: 0.8
+      colsample_bytree: 0.8
+      scale_pos_weight: 3  # For class imbalance
+      random_state: 42
+      n_jobs: -1
+    tune: true
+    tune_params:
+      n_estimators: [50, 100, 200]
+      max_depth: [3, 6, 9]
+      learning_rate: [0.01, 0.05, 0.1]
+      subsample: [0.7, 0.8, 0.9]
+      colsample_bytree: [0.7, 0.8, 0.9]
+  
+  # LightGBM
+  lightgbm:
+    enabled: true
+    params:
+      n_estimators: 100
+      max_depth: 6
+      learning_rate: 0.1
+      num_leaves: 31
+      subsample: 0.8
+      colsample_bytree: 0.8
+      class_weight: 'balanced'
+      random_state: 42
+      n_jobs: -1
+    tune: true
+    tune_params:
+      n_estimators: [50, 100, 200]
+      max_depth: [3, 6, 9]
+      learning_rate: [0.01, 0.05, 0.1]
+      num_leaves: [15, 31, 63]
+
+# Hyperparameter Tuning
+tuning:
+  method: 'random_search'  # Options: grid_search, random_search, bayesian
+  cv_folds: 5
+  n_iter: 20  # For random search
+  scoring: 'f1'  # Primary metric for optimization
+  verbose: 2
+
+# Evaluation Metrics
+evaluation:
+  # Metrics to calculate
+  metrics:
+    - 'accuracy'
+    - 'precision'
+    - 'recall'
+    - 'f1'
+    - 'roc_auc'
+    - 'pr_auc'
+  
+  # Threshold optimization
+  threshold:
+    optimize: true
+    metric: 'f1'  # Metric to optimize threshold on
+    range: [0.3, 0.7]
+    step: 0.05
+  
+  # Business metrics
+  business:
+    # Customer Lifetime Value
+    avg_clv: 1500  # Average customer lifetime value in $
+    
+    # Retention campaign costs
+    campaign_cost_per_customer: 150  # Cost to run retention campaign
+    
+    # Success rates
+    retention_rate_without_intervention: 0.1  # 10% retain naturally
+    retention_rate_with_intervention: 0.3     # 30% retain with campaign
+    
+    # False positive cost (bothering happy customers)
+    false_positive_cost: 20  # Brand damage, annoyance
+
+# Model Monitoring
+monitoring:
+  # Data drift detection
+  drift_detection:
+    method: 'psi'  # Population Stability Index
+    threshold: 0.1  # Alert if PSI > 0.1
+    
+  # Performance monitoring
+  performance:
+    min_accuracy: 0.75
+    min_f1: 0.55
+    min_roc_auc: 0.80
+    
+  # Retraining triggers
+  retrain:
+    performance_drop: 0.05  # Retrain if F1 drops by 5%
+    time_based: 90  # Retrain every 90 days
+    data_drift: true  # Retrain on significant drift
+
+# Deployment
+deployment:
+  model_registry: "models/model_registry.json"
+  champion_model: "xgboost"  # Current production model
+  
+  # API settings
+  api:
+    host: "0.0.0.0"
+    port: 8000
+    workers: 4
+    
+  # Prediction settings
+  prediction:
+    batch_size: 1000
+    probability_threshold: 0.5  # Can be overridden
+    return_probabilities: true
+    return_feature_importance: false  # For transparency
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/pipeline.log"
+
+# Experiment Tracking (MLflow)
+mlflow:
+  tracking_uri: "sqlite:///mlflow.db"
+  experiment_name: "telco-churn-prediction"
+  run_name_prefix: "run"
+  log_params: true
+  log_metrics: true
+  log_artifacts: true
+  log_models: true

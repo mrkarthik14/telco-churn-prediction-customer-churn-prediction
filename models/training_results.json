@@ -1,0 +1,182 @@
+{
+  "logistic_regression": {
+    "cv_scores": {
+      "accuracy_mean": 0.752489677180151,
+      "accuracy_std": 0.01407522478667102,
+      "precision_mean": 0.5208283230191854,
+      "precision_std": 0.017136583362440116,
+      "recall_mean": 0.7959595959595959,
+      "recall_std": 0.041434666836135114,
+      "f1_mean": 0.6294682021791611,
+      "f1_std": 0.02387941546420665,
+      "roc_auc_mean": 0.8500914559427051,
+      "roc_auc_std": 0.018452610673806
+    },
+    "test_metrics": {
+      "model_name": "logistic_regression",
+      "accuracy": 0.7451957295373666,
+      "precision": 0.5127272727272727,
+      "recall": 0.7580645161290323,
+      "f1": 0.6117136659436009,
+      "roc_auc": 0.8425857977078974,
+      "confusion_matrix": [
+        [
+          765,
+          268
+        ],
+        [
+          90,
+          282
+        ]
+      ],
+      "true_negatives": 765,
+      "false_positives": 268,
+      "false_negatives": 90,
+      "true_positives": 282
+    },
+    "business_value": {
+      "true_positive_value": 126900.0,
+      "false_positive_cost": 45560,
+      "false_negative_cost": 121500.0,
+      "net_business_value": -40160.0,
+      "campaign_cost": 82500,
+      "roi_percentage": -48.67878787878788,
+      "value_per_customer_contacted": -73.01818181818182
+    }
+  },
+  "random_forest": {
+    "cv_scores": {
+      "accuracy_mean": 0.7767068699435612,
+      "accuracy_std": 0.012475774084075575,
+      "precision_mean": 0.5592560702151688,
+      "precision_std": 0.017776421984786052,
+      "recall_mean": 0.7340067340067339,
+      "recall_std": 0.03129683512086801,
+      "f1_mean": 0.6347059767900555,
+      "f1_std": 0.021565679642549896,
+      "roc_auc_mean": 0.8418407736496396,
+      "roc_auc_std": 0.018519375480327397
+    },
+    "test_metrics": {
+      "model_name": "random_forest",
+      "accuracy": 0.7750889679715303,
+      "precision": 0.558091286307054,
+      "recall": 0.7231182795698925,
+      "f1": 0.629976580796253,
+      "roc_auc": 0.8413575138702392,
+      "confusion_matrix": [
+        [
+          820,
+          213
+        ],
+        [
+          103,
+          269
+        ]
+      ],
+      "true_negatives": 820,
+      "false_positives": 213,
+      "false_negatives": 103,
+      "true_positives": 269
+    },
+    "business_value": {
+      "true_positive_value": 121050.0,
+      "false_positive_cost": 36210,
+      "false_negative_cost": 139050.0,
+      "net_business_value": -54210.0,
+      "campaign_cost": 72300,
+      "roi_percentage": -74.97925311203319,
+      "value_per_customer_contacted": -112.4688796680498
+    }
+  },
+  "xgboost": {
+    "cv_scores": {
+      "accuracy_mean": 0.7572975919230075,
+      "accuracy_std": 0.011442805426040486,
+      "precision_mean": 0.5273575146711247,
+      "precision_std": 0.014355494478650916,
+      "recall_mean": 0.7932659932659932,
+      "recall_std": 0.020602099044819324,
+      "f1_mean": 0.6335222455759519,
+      "f1_std": 0.01656080593000028,
+      "roc_auc_mean": 0.8456380739566851,
+      "roc_auc_std": 0.018430923170246326
+    },
+    "test_metrics": {
+      "model_name": "xgboost",
+      "accuracy": 0.7601423487544484,
+      "precision": 0.5319926873857403,
+      "recall": 0.782258064516129,
+      "f1": 0.6332970620239391,
+      "roc_auc": 0.8440847203572432,
+      "confusion_matrix": [
+        [
+          777,
+          256
+        ],
+        [
+          81,
+          291
+        ]
+      ],
+      "true_negatives": 777,
+      "false_positives": 256,
+      "false_negatives": 81,
+      "true_positives": 291
+    },
+    "business_value": {
+      "true_positive_value": 130950.0,
+      "false_positive_cost": 43520,
+      "false_negative_cost": 109350.0,
+      "net_business_value": -21920.0,
+      "campaign_cost": 82050,
+      "roi_percentage": -26.71541742839732,
+      "value_per_customer_contacted": -40.07312614259598
+    }
+  },
+  "lightgbm": {
+    "cv_scores": {
+      "accuracy_mean": 0.7508868276699106,
+      "accuracy_std": 0.01373089255600097,
+      "precision_mean": 0.5185975972280649,
+      "precision_std": 0.01650293914978845,
+      "recall_mean": 0.8114478114478114,
+      "recall_std": 0.023033846971699776,
+      "f1_mean": 0.632760738280126,
+      "f1_std": 0.018965729468597058,
+      "roc_auc_mean": 0.8485202085708305,
+      "roc_auc_std": 0.017009232697662757
+    },
+    "test_metrics": {
+      "model_name": "lightgbm",
+      "accuracy": 0.7359430604982207,
+      "precision": 0.5008665511265165,
+      "recall": 0.7768817204301075,
+      "f1": 0.6090621707060063,
+      "roc_auc": 0.8404922503617192,
+      "confusion_matrix": [
+        [
+          745,
+          288
+        ],
+        [
+          83,
+          289
+        ]
+      ],
+      "true_negatives": 745,
+      "false_positives": 288,
+      "false_negatives": 83,
+      "true_positives": 289
+    },
+    "business_value": {
+      "true_positive_value": 130050.0,
+      "false_positive_cost": 48960,
+      "false_negative_cost": 112050.0,
+      "net_business_value": -30960.0,
+      "campaign_cost": 86550,
+      "roi_percentage": -35.77123050259966,
+      "value_per_customer_contacted": -53.65684575389948
+    }
+  }
+}
